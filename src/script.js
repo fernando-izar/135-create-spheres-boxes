@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "lil-gui";
 import * as CANNON from "cannon-es";
+import { BoxGeometry } from "three";
 
 /**
  * Debug
@@ -117,7 +118,9 @@ world.defaultContactMaterial = defaultContactMaterial;
 // world.addBody(sphereBody);
 
 // Floor
-const floorShape = new CANNON.Plane();
+// const floorShape = new CANNON.Plane();
+const floorShape = new CANNON.Box(new CANNON.Vec3(5, 5, 0.1));
+
 const floorBody = new CANNON.Body();
 floorBody.mass = 0;
 floorBody.addShape(floorShape);
@@ -144,9 +147,11 @@ world.addBody(floorBody);
  * Floor
  */
 const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(50, 50),
+  // new THREE.PlaneGeometry(10, 10),
+  new BoxGeometry(10, 10, 0.1),
+
   new THREE.MeshStandardMaterial({
-    color: "#777777",
+    color: "#a4ff00",
     metalness: 0.3,
     roughness: 0.4,
     envMap: environmentMapTexture,
@@ -234,6 +239,7 @@ const sphereGeometry = new THREE.SphereGeometry(1, 20, 20);
 const sphereMaterial = new THREE.MeshStandardMaterial({
   metalness: 0.3,
   roughness: 0.4,
+  color: 0xff7610,
   envMap: environmentMapTexture,
 });
 
@@ -271,6 +277,7 @@ const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 const boxMaterial = new THREE.MeshStandardMaterial({
   metalness: 0.3,
   roughness: 0.4,
+  color: 0x1e77dc,
   envMap: environmentMapTexture,
 });
 
